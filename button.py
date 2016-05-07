@@ -3,11 +3,26 @@ import time
 
 GPIO.setmode(GPIO.BCM)
 butPin=16
+redPin=23
+bluePin=24
+greenPin=18
 GPIO.setup(butPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(redPin,GPIO.OUT)
+#GPIO.setup(bluePin,GPIO.OUT)
+GPIO.setup(greenPin,GPIO.OUT)
+
 
 print("vamo")
-
+i=0
+activated=False
 while True:
 	if (GPIO.input(butPin)):
+		activated= not activated
 		print("Button Pressied")
-	time.sleep(0.05)
+		GPIO.output(redPin,not activated)
+		GPIO.output(greenPin,activated)
+		time.sleep(1)		
+	time.sleep(0.1)
+	#GPIO.output(redPin,i%4==0)
+	#GPIO.output(bluePin,i%4==1)
+	i=i+1
