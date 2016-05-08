@@ -1,11 +1,12 @@
 # raspberry-gpio-test
 
 ## Requirements
+```
 $ sudo easy_install -U RPIO
 $ git clone https://github.com/tylerwowen/RPIO.git
 $ cd RPIO
 $ sudo python setup.py install
-
+```
 #Bug https://github.com/metachris/RPIO/issues/53
 
 https://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/robot/buttons_and_switches/
@@ -20,6 +21,8 @@ https://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/robot/buttons_and_switch
 
 ## Using Flask
 ###Installation
+```
 sudo apt-get install python-pip
 sudo pip install flask
+```
 http://mattrichardson.com/Raspberry-Pi-Flask/index.html
