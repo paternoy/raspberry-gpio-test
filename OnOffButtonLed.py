@@ -1,7 +1,6 @@
 import RPi.GPIO as GPIO
 import time
 
-pwm=0
 
 class OnOffButtonLed(object):
 	
@@ -16,11 +15,16 @@ class OnOffButtonLed(object):
 		GPIO.setup(self.redPin,GPIO.OUT)
 		GPIO.setup(self.bluePin,GPIO.OUT)
 		GPIO.setup(self.greenPin,GPIO.OUT)
+		GPIO.add_event_detect(self.butPin, GPIO.RISING, callback=self.buttonCallback, bouncetime=1000)
 		#self.pwm = GPIO.PWM(self.bluePin, 50)
 		#self.dc = 0
 		GPIO.output(self.redPin,False)
 		GPIO.output(self.greenPin,False)
 		GPIO.output(self.bluePin,False)
+
+	def buttonCallback(self,channel):
+		print("Button Pressed")
+		self.toggle()
 
 	def loop(self):
 		print("Starting...")
@@ -30,7 +34,6 @@ class OnOffButtonLed(object):
 		while True:
 			if (GPIO.input(self.butPin)):
 				self.toggle()
-				print("Button Pressed")
 				time.sleep(1)		
 			time.sleep(0.1)
 			i=i+1
@@ -44,3 +47,5 @@ class OnOffButtonLed(object):
 	def toggle(self):
 		self.activated= not self.activated
 		self.refresh()
+	def cleanup(self):
+		GPIO.cleanup()
