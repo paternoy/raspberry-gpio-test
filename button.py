@@ -12,17 +12,20 @@ GPIO.setup(redPin,GPIO.OUT)
 GPIO.setup(greenPin,GPIO.OUT)
 
 
-print("vamo")
-i=0
-activated=False
-while True:
-	if (GPIO.input(butPin)):
-		activated= not activated
-		print("Button Pressied")
-		GPIO.output(redPin,not activated)
-		GPIO.output(greenPin,activated)
-		time.sleep(1)		
-	time.sleep(0.1)
-	#GPIO.output(redPin,i%4==0)
-	#GPIO.output(bluePin,i%4==1)
-	i=i+1
+print("Starting...")
+try:
+	i=0
+	activated=False
+	while True:
+		if (GPIO.input(butPin)):
+			activated= not activated
+			print("Button Pressed")
+			GPIO.output(redPin,not activated)
+			GPIO.output(greenPin,activated)
+			time.sleep(1)		
+		time.sleep(0.1)
+		#GPIO.output(redPin,i%4==0)
+		#GPIO.output(bluePin,i%4==1)
+		i=i+1
+except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
+	GPIO.cleanup() # cleanup all GPIO
